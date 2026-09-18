@@ -59,7 +59,7 @@ namespace club
             if (member.get_email() == email)
             {
                 removed = true;
-            }
+            };
             return member.get_email() == email;
         });
         this->member_list.erase(new_vector_end, this->member_list.end());
@@ -97,7 +97,7 @@ namespace club
             if (officer.get_email() == email)
             {
                 removed = true;
-            }
+            };
             return officer.get_email() == email;
         });
         this->officer_list.erase(new_vector_end, this->officer_list.end());
@@ -135,7 +135,7 @@ namespace club
             if (event.get_name() == name && event.get_start().getDate() == start)
             {
                 removed = true;
-            }
+            };
             return (event.get_name() == name) && (event.get_start().getDate() == start);
         });
         this->event_list.erase(new_vector_end, this->event_list.end());
