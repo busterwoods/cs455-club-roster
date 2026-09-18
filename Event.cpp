@@ -1,8 +1,8 @@
 /*
 ==================================================
 Developer: Christian Tampus
-Last Update: 9/16/2026
-Version: 1
+Last Update: 9/19/2026
+Version: 2
 ==================================================
 */
 
@@ -26,6 +26,16 @@ namespace club
     ==================================================
     */
     club::Event::Event(std::string name, std::string description, club::DateTime start, club::DateTime end, std::string location): name(name), description(description), start(start), end(end), location(location){};
+    
+    /*
+    ==================================================
+    Overloaded Equality Operator For Event Class
+    ==================================================
+    */
+    bool club::Event::operator==(const Event &other) const
+    {
+        return (this->get_name() == other.get_name()) && (this->get_description() == other.get_description()) && (this->get_start().getDate() == other.get_start().getDate()) && (this->get_end().getDate() == other.get_end().getDate()) && (this->get_location() == other.get_location());
+    };
 
     /*
     ==================================================

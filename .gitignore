@@ -1,0 +1,9 @@
+.vscode/
+
+*.o
+*.exe
+
+*.swp
+*.swo
+*~
+*.un~

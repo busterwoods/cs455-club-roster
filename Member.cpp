@@ -1,8 +1,8 @@
 /*
 ==================================================
 Developer: Christian Tampus
-Last Update: 9/16/2026
-Version: 1
+Last Update: 9/18/2026
+Version: 2
 ==================================================
 */
 
@@ -27,6 +27,16 @@ namespace club
     */
     club::Member::Member(std::string first_name, std::string last_name, std::string email, club::Date joined): first_name(first_name), last_name(last_name), email(email), joined(joined){};
     
+    /*
+    ==================================================
+    Overloaded Equality Operator For Member Class
+    ==================================================
+    */
+    bool club::Member::operator==(const Member &other) const
+    {
+        return (this->get_first() == other.get_first()) && (this->get_last() == other.get_last()) && (this->get_email() == other.get_email()) && (this->get_joined() == other.get_joined());
+    };
+
     /*
     ==================================================
     Member::get_name() Function

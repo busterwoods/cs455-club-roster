@@ -1,8 +1,8 @@
 /*
 ==================================================
 Developer: Christian Tampus
-Last Update: 9/16/2026
-Version: 1
+Last Update: 9/18/2026
+Version: 2
 ==================================================
 */
 
@@ -19,6 +19,7 @@ Include Guards
 Dependencies
 ==================================================
 */
+//#include "Screen.h" <- STILL NEEDS TO BE IMPLEMENTED
 #include "Club_roster.h"
 
 namespace club
@@ -31,7 +32,7 @@ namespace club
     class Club_app
     {
         private:
-            //textui::Screen text_ui;
+            //textui::Screen text_ui; <- DEPENDS ON #include "Screen.h"
             club::Club_roster roster;
 
             /*

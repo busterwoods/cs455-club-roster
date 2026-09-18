@@ -11,7 +11,8 @@ SOURCES = main.cpp \
           Event.cpp \
           Member.cpp \
           Officer.cpp \
-          Time.cpp
+          Time.cpp \
+          Menu_item.cpp \
 
 OBJECTS = $(SOURCES:.cpp=.o)
 

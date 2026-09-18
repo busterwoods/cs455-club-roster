@@ -1,8 +1,8 @@
 /*
 ==================================================
 Developer: Christian Tampus
-Last Update: 9/16/2026
-Version: 1
+Last Update: 9/18/2026
+Version: 2
 ==================================================
 */
 
@@ -37,6 +37,7 @@ namespace club
             club::Date joined;
         public:
             Member(std::string first_name, std::string last_name, std::string email, club::Date joined);
+            bool operator==(const Member &other) const;
             std::string get_name() const;
             std::string get_first() const;
             std::string get_last() const;

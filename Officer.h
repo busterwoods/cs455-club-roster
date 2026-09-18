@@ -1,8 +1,8 @@
 /*
 ==================================================
 Developer: Christian Tampus
-Last Update: 9/16/2026
-Version: 1
+Last Update: 9/18/2026
+Version: 2
 ==================================================
 */
 
@@ -30,12 +30,13 @@ namespace club
     */
     enum OFFICER_ROLE
     {
-        PRESIDENT = 1,
-        VICE_PRESIDENT = 2,
-        TREASURER = 3,
-        SECRETARY = 4,
-        EVENTS_CHAIR = 5,
-        INTERNET_CHAIR = 6,
+        PRESIDENT = 0,
+        VICE_PRESIDENT = 1,
+        TREASURER = 2,
+        SECRETARY = 3,
+        EVENTS_CHAIR = 4,
+        INTERNET_CHAIR = 5,
+        DEFAULT_ROLE = 6,
     };
 
     /*
@@ -50,6 +51,7 @@ namespace club
             club::Date expiration;
         public:
             Officer(std::string first_name, std::string last_name, std::string email, club::Date joined, club::OFFICER_ROLE role, club::Date expiration);
+            bool operator==(const Officer &other) const;
             club::OFFICER_ROLE get_role() const;
             club::Date get_expiration() const;
     };
