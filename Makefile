@@ -13,6 +13,8 @@ SOURCES = main.cpp \
           Officer.cpp \
           Time.cpp \
           Menu_item.cpp \
+		  Menu.cpp \
+	      Screen.cpp \
 
 OBJECTS = $(SOURCES:.cpp=.o)
 
