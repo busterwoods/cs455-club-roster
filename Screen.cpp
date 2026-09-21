@@ -3,12 +3,10 @@
 #include <limits>
 
 namespace textui {
-    Screen::Screen(const std::string& screen_title, std::vector<std::pair<char, std::string>> menu_options) {
+    Screen::Screen(const std::string& screen_title, const std::vector<std::pair<char, std::string>> menu_options) {
         menu.set_title(screen_title);
-        for (const std::string& option : menu_options) {
-            if (!option.empty()) {
-                menu.add_item(option[0], option.substr(1));
-            }
+        for (const std::pair<char, std::string>& option : menu_options) { 
+            menu.add_item(option.first, option.second);
         }
     }
 
