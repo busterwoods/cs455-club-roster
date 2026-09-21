@@ -12,7 +12,7 @@ namespace textui {
             Menu menu;
 
         public:
-            Screen(const std::string& screen_title, const std::vector<std::string>& menu_options);
+            Screen(const std::string& screen_title, std::vector<std::pair<char, std::string>> menu_options);
 
             void show() const;
             char get_choice() const;
