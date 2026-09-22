@@ -1,8 +1,8 @@
 /*
 ==================================================
 Developer: Christian Tampus
-Last Update: 9/18/2026
-Version: 2
+Last Update: 9/21/2026
+Version: 4
 ==================================================
 */
 
@@ -37,7 +37,10 @@ namespace club
     Club_app Constructor
     ==================================================
     */
-    club::Club_app::Club_app(): roster("Club Name", "Club Description") {};
+    club::Club_app::Club_app(): roster("Club Name", "Club Description") {
+        this->text_ui = textui::Screen(); //<-- IMPLEMENT THIS LATER!
+        return;
+    };
 
     /*
     ==================================================
