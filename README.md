@@ -23,3 +23,19 @@ TBC
 - **Textui Namespace:** Contains menu related classes such as Screen, Menu, and Menu_Item
 - **Version Control:** Git shared repository
 - **Build System** Make Makefile
+
+## Notes
+### Implementation Notes:
+- Display club should print club name, description, and roster
+- Will have a single screen that serves as the main menu
+- ```get_position``` should read in an officer name and return their position
+### Menu [Selector: Description] Pairs
+- A, add member
+- B, remove member
+- C, add officer
+- D, remove officer
+- E, add event
+- F, remove event
+- G, get position
+- H, display club
+- X, exit
