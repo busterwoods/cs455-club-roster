@@ -424,7 +424,7 @@ namespace club
         std::string name;
 		club::Date date(1,1,1); //default values
 
-		name = get_string("Enter the member's first name: ");
+		name = get_string("Enter the events's first name: ");
 		try {
 			date = get_date();
 		} catch (const std::out_of_range e) {

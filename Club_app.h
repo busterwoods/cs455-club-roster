@@ -1,8 +1,8 @@
 /*
 ==================================================
 Developer: Christian Tampus
-Last Update: 9/23/2026
-Version: 5
+Last Update: 9/24/2026
+Version: 6
 ==================================================
 */
 
@@ -19,7 +19,7 @@ Include Guards
 Dependencies
 ==================================================
 */
-//#include "Screen.h" <- INCLUDE THIS LATER!
+#include "Screen.h"
 #include "Club_roster.h"
 
 namespace club
@@ -35,7 +35,7 @@ namespace club
             inline static const std::string SCREEN_TITLE = "Main Menu";
 			inline static const std::vector<std::pair<char, std::string>> MENU_OPTIONS = {
 				{'1', "Add Member"},
-				{'2', "Remove Memeber"},
+				{'2', "Remove Member"},
 				{'3', "Add Officer"},
 				{'4', "Remove Officer"},
 				{'5', "Add Event"},
@@ -54,7 +54,6 @@ namespace club
             Private Helper Functions
             ==================================================
             */
-            void execute(char choice);
             std::string get_string();
 			void test();
             void execute(char choice);

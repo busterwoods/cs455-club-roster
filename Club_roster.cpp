@@ -2,7 +2,7 @@
 ==================================================
 Developer: Christian Tampus
 Last Update: 9/23/2026
-Version: 3
+Version: 4
 ==================================================
 */
 
@@ -36,9 +36,11 @@ namespace club
     bool club::Club_roster::insert_member(club::Member member)
     {
         if (std::find(this->member_list.begin(), this->member_list.end(), member) != this->member_list.end()) {
+            std::cout << "[SYSTEM ERROR] Member Already Exists!" << std::endl;
             return false;
         };
         this->member_list.push_back(member);
+        std::cout << "[SYSTEM MESSAGE] Member Added Successfully!" << std::endl;
         return true;
     };
 
@@ -63,6 +65,11 @@ namespace club
             return member.get_email() == email;
         });
         this->member_list.erase(new_vector_end, this->member_list.end());
+        if (removed) {
+            std::cout << "[SYSTEM MESSAGE] Member Removed Successfully!" << std::endl;
+        } else {
+            std::cout << "[SYSTEM ERROR] Member Removed Unsuccessfully!" << std::endl;
+        };
         return removed;
     };
 
@@ -74,9 +81,11 @@ namespace club
     bool club::Club_roster::insert_officer(club::Officer officer)
     {
         if (std::find(this->officer_list.begin(), this->officer_list.end(), officer) != this->officer_list.end()) {
+            std::cout << "[SYSTEM ERROR] Officer Already Exists!" << std::endl;
             return false;
         };
         this->officer_list.push_back(officer);
+        std::cout << "[SYSTEM MESSAGE] Officer Added Successfully!" << std::endl;
         return true;
     };
 
@@ -101,6 +110,11 @@ namespace club
             return officer.get_email() == email;
         });
         this->officer_list.erase(new_vector_end, this->officer_list.end());
+        if (removed) {
+            std::cout << "[SYSTEM MESSAGE] Officer Removed Successfully!" << std::endl;
+        } else {
+            std::cout << "[SYSTEM ERROR] Officer Removed Unsuccessfully!" << std::endl;
+        };
         return removed;
     };
 
@@ -112,9 +126,11 @@ namespace club
     bool club::Club_roster::insert_event(club::Event event)
     {
         if (std::find(this->event_list.begin(), this->event_list.end(), event) != this->event_list.end()) {
+            std::cout << "[SYSTEM ERROR] Event Already Exists!" << std::endl;
             return false;
         };
         this->event_list.push_back(event);
+        std::cout << "[SYSTEM MESSAGE] Event Added Successfully!" << std::endl;
         return true;
     };
 
@@ -139,6 +155,11 @@ namespace club
             return (event.get_name() == name) && (event.get_start().getDate() == start);
         });
         this->event_list.erase(new_vector_end, this->event_list.end());
+        if (removed) {
+            std::cout << "[SYSTEM MESSAGE] Event Removed Successfully!" << std::endl;
+        } else {
+            std::cout << "[SYSTEM ERROR] Event Removed Unsuccessfully!" << std::endl;
+        };
         return removed;
     };
 
@@ -149,9 +170,10 @@ namespace club
     */
     void club::Club_roster::display_roster() const
     {
+        std::cout << "[SYSTEM MESSAGE] Now Displaying Club Roster..." << std::endl;
         std::string officer_role_string_array[7] = {"President", "Vice President", "Treasurer", "Secretary", "Events Chair", "Internet Chair", "Default Role"};
         for (std::size_t index = 0; index < this->officer_list.size(); index++) {
-            std::cout << "[SYSTEM MESSAGE] Officer Name: " << this->officer_list[index].get_name() << " Role: " << officer_role_string_array[this->officer_list[index].get_role()] << " Email: " << this->officer_list[index].get_email() << " Joined Date: " << this->officer_list[index].get_joined() << std::endl;
+            std::cout << "[SYSTEM MESSAGE] Officer Name: " << this->officer_list[index].get_name() << " Role: " << officer_role_string_array[this->officer_list[index].get_role()] << " Email: " << this->officer_list[index].get_email() << " Joined Date: " << this->officer_list[index].get_joined() << " Expiration Date: " << this->officer_list[index].get_expiration() << std::endl;
         };
         for (std::size_t index = 0; index < this->member_list.size(); index++) {
             std::cout << "[SYSTEM MESSAGE] Member Name: " << this->member_list[index].get_name() << " Email: " << this->member_list[index].get_email() << " Joined Date: " << this->member_list[index].get_joined() << std::endl;
@@ -159,6 +181,7 @@ namespace club
         for (std::size_t index = 0; index < this->event_list.size(); index++) {
             std::cout << "[SYSTEM MESSAGE] Event Name: " << this->event_list[index].get_name() << " Description: " << this->event_list[index].get_description() << " Start Date: " << this->event_list[index].get_start() << " End Date: " << this->event_list[index].get_end() << " Location: " << this->event_list[index].get_location() << std::endl;
         };
+        std::cout << "[SYSTEM MESSAGE] Finished Display Club Roster." << std::endl;
         return;
     };
 };
