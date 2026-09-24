@@ -1,8 +1,8 @@
 /*
 ==================================================
 Developer: Christian Tampus
-Last Update: 9/18/2026
-Version: 2
+Last Update: 9/23/2026
+Version: 3
 ==================================================
 */
 
@@ -151,10 +151,13 @@ namespace club
     {
         std::string officer_role_string_array[7] = {"President", "Vice President", "Treasurer", "Secretary", "Events Chair", "Internet Chair", "Default Role"};
         for (std::size_t index = 0; index < this->officer_list.size(); index++) {
-            std::cout << "[SYSTEM MESSAGE] Officer Name: " << this->officer_list[index].get_name() << " Role: " << officer_role_string_array[this->officer_list[index].get_role()] << std::endl;
+            std::cout << "[SYSTEM MESSAGE] Officer Name: " << this->officer_list[index].get_name() << " Role: " << officer_role_string_array[this->officer_list[index].get_role()] << " Email: " << this->officer_list[index].get_email() << " Joined Date: " << this->officer_list[index].get_joined() << std::endl;
         };
         for (std::size_t index = 0; index < this->member_list.size(); index++) {
-            std::cout << "[SYSTEM MESSAGE] Member Name: " << this->member_list[index].get_name() << std::endl;
+            std::cout << "[SYSTEM MESSAGE] Member Name: " << this->member_list[index].get_name() << " Email: " << this->member_list[index].get_email() << " Joined Date: " << this->member_list[index].get_joined() << std::endl;
+        };
+        for (std::size_t index = 0; index < this->event_list.size(); index++) {
+            std::cout << "[SYSTEM MESSAGE] Event Name: " << this->event_list[index].get_name() << " Description: " << this->event_list[index].get_description() << " Start Date: " << this->event_list[index].get_start() << " End Date: " << this->event_list[index].get_end() << " Location: " << this->event_list[index].get_location() << std::endl;
         };
         return;
     };

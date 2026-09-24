@@ -1,8 +1,8 @@
 /*
 ==================================================
 Developer: Christian Tampus
-Last Update: 9/21/2026
-Version: 4
+Last Update: 9/23/2026
+Version: 5
 ==================================================
 */
 
@@ -38,7 +38,7 @@ namespace club
     ==================================================
     */
     club::Club_app::Club_app(): roster("Club Name", "Club Description") {
-        this->text_ui = textui::Screen(); //<-- IMPLEMENT THIS LATER!
+        //this->text_ui = textui::Screen(); //<-- IMPLEMENT THIS LATER!
         return;
     };
 
@@ -92,10 +92,12 @@ namespace club
         std::cout << "[SYSTEM MESSAGE] Club_roster 2. remove_event():" << (roster1.remove_event(event1.get_name(), event1.get_start().getDate()) == true ? "SUCCESS REMOVE!" : "FAILED REMOVE!") << std::endl;
         roster1.insert_member(member1);
         roster1.insert_officer(officer1);
+        roster1.insert_event(event1);
         std::cout << "[SYSTEM MESSAGE] Display Club Roster Here (Should Not Be Empty)!" << std::endl;
         roster1.display_roster();
         roster1.remove_member(member1.get_email());
         roster1.remove_officer(officer1.get_email());
+        roster1.remove_event(event1.get_name(), event1.get_start().getDate());
         std::cout << "[SYSTEM MESSAGE] Display Club Roster Here (Should Be Empty)!" << std::endl;
         roster1.display_roster();
         return;
@@ -106,8 +108,9 @@ namespace club
     Club_app::execute() Function
     ==================================================
     */
-    void club::Club_app::execute()
+    void club::Club_app::execute(char choice)
     {
+        std::cout << "[SYSTEM MESSAGE] choice: " << choice << std::endl;
         std::cout << "[SYSTEM MESSAGE] Add execute() Function Implementation Here!" << std::endl;
         return;
     };

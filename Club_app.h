@@ -1,8 +1,8 @@
 /*
 ==================================================
 Developer: Christian Tampus
-Last Update: 9/22/2026
-Version: 4
+Last Update: 9/23/2026
+Version: 5
 ==================================================
 */
 
@@ -19,7 +19,7 @@ Include Guards
 Dependencies
 ==================================================
 */
-#include "Screen.h"
+//#include "Screen.h" <- INCLUDE THIS LATER!
 #include "Club_roster.h"
 
 namespace club
@@ -32,7 +32,7 @@ namespace club
     class Club_app
     {
         private:
-            textui::Screen text_ui;
+            //textui::Screen text_ui; <- IMPLEMENT THIS LATER!
             club::Club_roster roster;
 
             /*
@@ -40,7 +40,7 @@ namespace club
             Private Helper Functions
             ==================================================
             */
-            void execute();
+            void execute(char choice);
             std::string get_string();
             club::OFFICER_ROLE get_position();
             void add_member();
