@@ -32,8 +32,22 @@ namespace club
     class Club_app
     {
         private:
-            //textui::Screen text_ui; <- IMPLEMENT THIS LATER!
+            inline static const std::string SCREEN_TITLE = "Main Menu";
+			inline static const std::vector<std::pair<char, std::string>> MENU_OPTIONS = {
+				{'1', "Add Member"},
+				{'2', "Remove Memeber"},
+				{'3', "Add Officer"},
+				{'4', "Remove Officer"},
+				{'5', "Add Event"},
+				{'6', "Remove Event"},
+				{'7', "Display Club Roster"},
+				{'0', "Exit"}
+			};
+			inline static const std::string CLUB_NAME = "UNA ACM Student Chapter";
+			inline static const std::string CLUB_DESCRIPTION = "N/A";
+			textui::Screen text_ui;
             club::Club_roster roster;
+			 
 
             /*
             ==================================================
@@ -42,6 +56,11 @@ namespace club
             */
             void execute(char choice);
             std::string get_string();
+			void test();
+            void execute(char choice);
+            std::string get_string(std::string question);
+			club::Date get_date();
+			club::Time get_time();
             club::OFFICER_ROLE get_position();
             void add_member();
             void delete_member();

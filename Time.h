@@ -9,6 +9,7 @@ namespace club
   class Time
   {
   public:
+    unsigned short minute;
     Time() = delete;
     Time(unsigned short h, unsigned short m, char a);
     bool operator==(const Time &t) const;
@@ -18,7 +19,6 @@ namespace club
 
   private:
     unsigned short hour;
-    unsigned short minute;
   };
 }
 #endif // TIME_H

@@ -37,19 +37,15 @@ namespace club
     Club_app Constructor
     ==================================================
     */
-    club::Club_app::Club_app(): roster("Club Name", "Club Description") {
-        //this->text_ui = textui::Screen(); //<-- IMPLEMENT THIS LATER!
-        return;
-    };
+    club::Club_app::Club_app() : text_ui(SCREEN_TITLE, MENU_OPTIONS), roster(CLUB_NAME, CLUB_DESCRIPTION) {};
 
     /*
     ==================================================
-    Club_app::run() Function
+    Club_app::test() Function
     ==================================================
     */
-    void club::Club_app::run()
-    {
-        std::cout << "[SYSTEM MESSAGE] Add run() Function Implementation Here!" << std::endl;
+	void club::Club_app::test() 
+	{
         /*
         ==================================================
         PLACE YOUR UNIT TESTS HERE! (REMOVE THIS LATER!)
@@ -100,6 +96,21 @@ namespace club
         roster1.remove_event(event1.get_name(), event1.get_start().getDate());
         std::cout << "[SYSTEM MESSAGE] Display Club Roster Here (Should Be Empty)!" << std::endl;
         roster1.display_roster();
+	}
+    /*
+    ==================================================
+    Club_app::run() Function
+    ==================================================
+    */
+    void club::Club_app::run()
+    {
+		//test();
+		char choice = 'x';
+		while (choice != '0') {
+        	text_ui.show();
+			choice = text_ui.get_choice();
+			execute(choice);
+		}
         return;
     };
 
@@ -110,9 +121,35 @@ namespace club
     */
     void club::Club_app::execute(char choice)
     {
-        std::cout << "[SYSTEM MESSAGE] choice: " << choice << std::endl;
-        std::cout << "[SYSTEM MESSAGE] Add execute() Function Implementation Here!" << std::endl;
-        return;
+		switch (choice) {
+			case '1':
+				add_member();
+				break;
+			case '2':
+				delete_member();
+				break;
+			case '3':
+				add_officer();
+				break;
+			case '4':
+				delete_officer();
+				break;
+			case '5':
+				add_event();
+				break;
+			case '6':
+				delete_event();
+				break;
+			case '7':
+				display_club();
+				break;
+			case '0':
+				//do nothing
+				break;
+			default:
+				std::cout << "[SYSTEM MESSAGE] Error has Occured! (check Screen.get_choice())" << std::endl;
+			
+		}
     };
 
     /*
@@ -120,10 +157,17 @@ namespace club
     Club_app::get_string() Function
     ==================================================
     */
-    std::string club::Club_app::get_string()
+    std::string club::Club_app::get_string(std::string question)
     {
-        std::cout << "[SYSTEM MESSAGE] Add get_string() Function Implementation Here!" << std::endl;
-        return "";
+		std::string response = "";
+        
+		do
+		{
+			std::cout << question;
+			getline(std::cin, response);
+		} while (response.length() == 0);
+
+        return response;
     };
 
     /*
@@ -133,9 +177,88 @@ namespace club
     */
     club::OFFICER_ROLE club::Club_app::get_position()
     {
-        std::cout << "[SYSTEM MESSAGE] Add get_position() Function Implementation Here!" << std::endl;
-        return club::OFFICER_ROLE::DEFAULT_ROLE;
+		char choice;
+		std::string screen_title = "Officer Positions";
+		std::vector<std::pair<char, std::string>> officer_positions = {
+			{'1', "President"},
+			{'2', "Vice President"},
+			{'3', "Treasurer"},
+			{'4', "Secretary"},
+			{'5', "Events Chair"},
+			{'6', "Internet Chair"}
+		};
+        textui::Screen officer_screen(screen_title, officer_positions);
+		officer_screen.show();
+		choice = officer_screen.get_choice();
+
+		switch (choice) {
+			case '1':
+				return club::OFFICER_ROLE::PRESIDENT;
+				break;
+			case '2':
+				return club::OFFICER_ROLE::VICE_PRESIDENT;
+				break;
+			case '3':
+				return club::OFFICER_ROLE::TREASURER;
+				break;
+			case '4':
+				return club::OFFICER_ROLE::SECRETARY;
+				break;
+			case '5':
+				return club::OFFICER_ROLE::EVENTS_CHAIR;
+				break;
+			case '6':
+				return club::OFFICER_ROLE::INTERNET_CHAIR;
+				break;
+			default:
+				return club::OFFICER_ROLE::DEFAULT_ROLE;
+		};
     };
+
+    /*
+    ==================================================
+    Club_app::get_date() Function
+    ==================================================
+    */
+	club::Date club::Club_app::get_date() {
+		unsigned short month, day, year;
+		try {
+			month = std::stoul(get_string("Enter the month: "));
+			day = std::stoul(get_string("Enter the day: "));
+			year = std::stoul(get_string("Enter the year: "));
+		} catch (const std::exception e) {
+			throw std::out_of_range("Poor Input");
+		}
+
+		if (month > 12 || day > 31) {
+			throw std::out_of_range("Poor Input");
+		}
+
+		club::Date date(year, month, day);
+		return date;
+	}
+
+    /*
+    ==================================================
+    Club_app::get_time() Function
+    ==================================================
+    */
+	club::Time club::Club_app::get_time() {
+		unsigned short hour, minute;
+		try {
+			hour = std::stoul(get_string("Enter the event's start hour (please use 24 hour time): "));
+			minute = std::stoul(get_string("Enter the event's start minute: "));
+		} catch (const std::out_of_range e) {
+			throw std::out_of_range("Poor Input");
+		}
+
+		if (hour > 24 || minute > 60) {
+			throw std::out_of_range("Poor Input");
+		}
+
+		club::Time time(hour, minute, 'a');
+		return time;
+	}
 
     /*
     ==================================================
@@ -144,8 +267,27 @@ namespace club
     */
     void club::Club_app::add_member()
     {
-        std::cout << "[SYSTEM MESSAGE] Add add_member() Function Implementation Here!" << std::endl;
-        return;
+     	std::string first, last, email;
+		bool add_member = true;
+		club::Date date(1,1,1); //default values
+
+		first = get_string("Enter the member's first name: ");
+		last = get_string("Enter the member's last name: ");
+		email = get_string("Enter the member's primary email address: ");
+		
+		try {
+			std::cout << "Please enter the join date of the member below" << std::endl;
+			date = get_date();
+		} catch (const std::out_of_range e) {
+			std::cout << "[ERROR] Impossible Date inputted" << std::endl;
+			add_member = false;
+		}
+
+		if (add_member) {
+			club::Member member(first, last, email, date);
+			roster.insert_member(member);
+		}
+		return;
     };
 
     /*
@@ -155,7 +297,9 @@ namespace club
     */
     void club::Club_app::delete_member()
     {
-        std::cout << "[SYSTEM MESSAGE] Add delete_member() Function Implementation Here!" << std::endl;
+		std::string email;
+		email = get_string("Enter the member's primary email address: ");
+		roster.remove_member(email);
         return;
     };
 
@@ -165,8 +309,37 @@ namespace club
     ==================================================
     */
     void club::Club_app::add_officer()
-    {
-        std::cout << "[SYSTEM MESSAGE] Add add_officer() Function Implementation Here!" << std::endl;
+   	{	
+     	std::string first, last, email;
+		bool add_officer = true;
+		club::Date join_date(1,1,1); //default values
+		club::Date exp_date(1,1,1); //default values
+
+		first = get_string("Enter the officer's first name: ");
+		last = get_string("Enter the officer's last name: ");
+		email = get_string("Enter the officer's primary email address: ");
+		
+		try {
+			std::cout << "Please enter the join date of the officer below" << std::endl;
+			join_date = get_date();
+		} catch (const std::exception e) {
+			std::cout << "[ERROR] Impossible Date inputted" << std::endl;
+			add_officer = false;
+		}
+
+		try {
+			std::cout << "Please enter the expiration date of the officer below" << std::endl;
+			exp_date = get_date();
+		} catch (const std::exception e) {
+			std::cout << "[ERROR] Impossible Date inputted" << std::endl;
+			add_officer = false;
+		}
+
+		if (add_officer) {
+			std::cout << "Please enter the officer's position from the menu below: ";
+			club::Officer officer(first, last, email, join_date, get_position(), exp_date);
+			roster.insert_officer(officer);
+		}
         return;
     };
 
@@ -177,7 +350,9 @@ namespace club
     */
     void club::Club_app::delete_officer()
     {
-        std::cout << "[SYSTEM MESSAGE] Add delete_officer() Function Implementation Here!" << std::endl;
+		std::string email;
+		email = get_string("Enter the member's primary email address: ");
+		roster.remove_officer(email);
         return;
     };
 
@@ -188,8 +363,54 @@ namespace club
     */
     void club::Club_app::add_event()
     {
-        std::cout << "[SYSTEM MESSAGE] Add add_event() Function Implementation Here!" << std::endl;
-        return;
+     	std::string name, desc, loc;
+		club::Date start_date(1,1,1); //default values
+		club::Date end_date(1,1,1);
+		club::Time start_time(1,1,'a');
+		club::Time end_time(1,1,'a');
+
+		name = get_string("Enter the name of the event: ");
+		desc = get_string("Enter the description of the event: ");
+		loc = get_string("Enter the location of the event: ");
+
+		try {
+			std::cout << "Please enter the start date of the event below" << std::endl;
+			start_date = get_date();
+		} catch (const std::out_of_range e) {
+			std::cout << "[ERROR] Impossible Date inputted" << std::endl;
+			return;
+		}
+		
+		try {
+			std::cout << "Please enter the start time of the event below" << std::endl;
+			start_time = get_time();
+		} catch (const std::out_of_range e) {
+			std::cout << "[ERROR] Impossible time inputted" << std::endl;
+			return;
+		}
+
+		try {
+			std::cout << "Please enter the end date of the event below" << std::endl;
+			end_date = get_date();
+		} catch (const std::out_of_range e) {
+			std::cout << "[ERROR] Impossible Date inputted" << std::endl;
+			return;
+		}
+       
+		try {
+			std::cout << "Please enter the end time of the event below" << std::endl;
+			end_time = get_time();
+		} catch (const std::out_of_range e) {
+			std::cout << "[ERROR] Impossible time inputted" << std::endl;
+			return;
+		}
+
+		club::DateTime start_date_time(start_date, start_time);
+		club::DateTime end_date_time(end_date, end_time);
+		club::Event event(name, desc, start_date_time, end_date_time, loc);
+		roster.insert_event(event);
+
+		return;
     };
 
     /*
@@ -198,9 +419,24 @@ namespace club
     ==================================================
     */
     void club::Club_app::delete_event()
-    {
-        std::cout << "[SYSTEM MESSAGE] Add delete_event() Function Implementation Here!" << std::endl;
-        return;
+	{
+		bool del_event = true;
+        std::string name;
+		club::Date date(1,1,1); //default values
+
+		name = get_string("Enter the member's first name: ");
+		try {
+			date = get_date();
+		} catch (const std::out_of_range e) {
+			std::cout << "[ERROR] Impossible Date inputted" << std::endl;
+			del_event = false;
+		}
+		
+		if (del_event)
+		{
+			roster.remove_event(name, date);
+		}
+		return;
     };
 
     /*
@@ -210,7 +446,7 @@ namespace club
     */
     void club::Club_app::display_club()
     {
-        std::cout << "[SYSTEM MESSAGE] Add display_club() Function Implementation Here!" << std::endl;
+		roster.display_roster();
         return;
     };
 };

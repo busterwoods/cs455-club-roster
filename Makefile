@@ -1,5 +1,4 @@
-CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17
+CXXFLAGS = -Wall -Wextra -std=c++23
 
 TARGET = club_app.exe
 
@@ -16,15 +15,15 @@ SOURCES = main.cpp \
 		  Menu.cpp \
 	      Screen.cpp \
 
-OBJECTS = $(SOURCES:.cpp=.o)
+OBJECTS = ${SOURCES:.cpp=.o}
 
-$(TARGET): $(OBJECTS)
-	$(CXX) $(OBJECTS) -o $(TARGET)
+${TARGET}: ${OBJECTS}
+	${CXX} ${OBJECTS} -o ${TARGET}
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	${CXX} ${CXXFLAGS} -c $< -o $@
 
 .PHONY: clean
 
 clean:
-	rm -f *.o $(TARGET)
+	rm -f *.o ${TARGET}
