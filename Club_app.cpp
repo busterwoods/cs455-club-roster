@@ -96,7 +96,7 @@ namespace club
         roster1.remove_event(event1.get_name(), event1.get_start().getDate());
         std::cout << "[SYSTEM MESSAGE] Display Club Roster Here (Should Be Empty)!" << std::endl;
         roster1.display_roster();
-	}
+	};
     /*
     ==================================================
     Club_app::run() Function
